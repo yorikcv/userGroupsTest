@@ -334,6 +334,12 @@ ul[dnd-list] li {
     }
 }
 
+@media (min-width: 1920px) {
+    #user-groups-view .users-container-with-info .dndPlaceholder {
+        width: 25%;
+    }
+}
+
 
 @media (min-width: 768px) {
     #user-groups-view .user-of-group .img-of-user {
