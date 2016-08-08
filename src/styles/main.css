@@ -321,6 +321,20 @@ ul[dnd-list] li {
     box-shadow: 0px 3px 18px 0px rgba(201, 201, 201, 0.2);
 }
 
+
+@media (min-width: 768px) {
+    #user-groups-view .users-container-with-info .dndPlaceholder {
+        width: 50%;
+    }
+}
+
+@media (min-width: 1366px) {
+    #user-groups-view .users-container-with-info .dndPlaceholder {
+        width: 33%;
+    }
+}
+
+
 @media (min-width: 768px) {
     #user-groups-view .user-of-group .img-of-user {
         float: left;
