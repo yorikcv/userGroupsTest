@@ -2,65 +2,48 @@
     <div class="container-fluid">
         <div class="info-boxes">
             <div class="box">
-                <div class="title">dsfsdfsd</div>
-                <div class="status">sdfdfsdf</div>
-                <div class="counter">45</div>
+                <div class="title">Messages</div>
+                <div class="status">active</div>
+                <div class="counter">0</div>
             </div>
             <div class="box">
-                <div class="title">dsfsdfsd</div>
-                <div class="status">sdfdfsdf</div>
-                <div class="counter">45</div>
+                <div class="title">Groups</div>
+                <div class="status">active</div>
+                <div class="counter">{{vm.groups.length}}</div>
             </div>
             <div class="box">
-                <div class="title">dsfsdfsd</div>
-                <div class="status">sdfdfsdf</div>
-                <div class="counter">45</div>
+                <div class="title">Members</div>
+                <div class="status">active</div>
+                <div class="counter">{{vm.counterOfMemebers}}</div>
             </div>
         </div>
+        <div class="user-group" ng-repeat="group in vm.groups">
+            <h2 class="title-group">{{group.title}}<a href="javascript:;" ng-click="vm.removeGroup($index)"><span class="group-btn red">&#215;</span></a></h2>
+            <ul class="row users-container-with-info" dnd-list="group.users" dnd-horizontal-list="true">
+                <li class="col-sm-6 col-md-4 col-lg-3" ng-repeat="user in group.users" dnd-draggable="user" dnd-moved="group.users.splice($index, 1)" dnd-effect-allowed="copyMove">
+                    <div class="user-of-group">
+                        <img class="img-of-user" ng-src="{{user.img}}" alt="">
+                        <div class="username overflow-elipsis">{{user.first_name + ' ' + user.last_name}}</div>
+                        <div class="job-title overflow-elipsis">{{user.job_title}}</div>
+                        <div class="drag-area" dnd-handle>
+                            <img src="images/drag-area.png" alt="">
+                        </div>
+                    </div>
+                </li>
+                <li class="col-md-12" ng-show="!group.users.length">
+                    Drop any <strong>user</strong> here
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
         <div class="user-group">
-            <h2 class="title-group">Group 1</h2>
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="user-of-group">
-                        <img class="img-of-user" src="https://robohash.org/doloremqueillosed.jpg?size=100x100&set=set1" alt="">
-                        <div class="username overflow-elipsis">fghfghfghfgh</div>
-                        <div class="job-title overflow-elipsis">gfhfghfghh</div>
-                        <div class="drag-area"></div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="user-of-group">
-                        <img class="img-of-user" src="https://robohash.org/doloremqueillosed.jpg?size=100x100&set=set1" alt="">
-                        <div class="username overflow-elipsis">fghfghfghfgh</div>
-                        <div class="job-title overflow-elipsis">gfhfghfghh</div>
-                        <div class="drag-area"></div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="user-of-group">
-                        <img class="img-of-user" src="https://robohash.org/doloremqueillosed.jpg?size=100x100&set=set1" alt="">
-                        <div class="username overflow-elipsis">fghfghfghfgh</div>
-                        <div class="job-title overflow-elipsis">gfhfghfghh</div>
-                        <div class="drag-area"></div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="user-of-group">
-                        <img class="img-of-user" src="https://robohash.org/doloremqueillosed.jpg?size=100x100&set=set1" alt="">
-                        <div class="username overflow-elipsis">fghfghfghfgh</div>
-                        <div class="job-title overflow-elipsis">gfhfghfghh</div>
-                        <div class="drag-area"></div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="user-of-group">
-                        <img class="img-of-user" src="https://robohash.org/doloremqueillosed.jpg?size=100x100&set=set1" alt="">
-                        <div class="username overflow-elipsis">fghfghfghfgh</div>
-                        <div class="job-title overflow-elipsis">gfhfghfghh</div>
-                        <div class="drag-area"></div>
-                    </div>
-                </div>
-            </div>
+            <h2 class="title-group">Registered Users <a href="javascript:;" ng-click="vm.addGroup()"><span class="group-btn green">+</span></a></h2>
+            <ul class="users-container" dnd-list="vm.registeredUsers" dnd-horizontal-list="true">
+                <li class="user-of-group-only-img" ng-repeat="regUser in vm.registeredUsers" dnd-draggable="regUser" dnd-moved="vm.registeredUsers.splice($index, 1)" dnd-effect-allowed="copyMove">
+                    <img class="img-of-user" ng-src="{{regUser.img}}" alt="">
+                </li>
+            </ul>
+            <div class="clearfix"></div>
         </div>
     </div>
 </section>

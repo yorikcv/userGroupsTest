@@ -9,7 +9,8 @@
     "angular-bootstrap": "^1.2.5",
     "underscore": "^1.8.3",
     "font-awesome": "^4.5.0",
-    "moment": "^2.12.0"
+    "moment": "^2.12.0",
+    "angular-drag-and-drop-lists": "^1.4.0"
   },
   "appPath": "src",
   "moduleName": "userGroupsApp"

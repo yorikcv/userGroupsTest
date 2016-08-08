@@ -1,37 +1,68 @@
 (function() {
-  'use strict';
+    'use strict';
 
-  angular
-    .module('app.userGroups')
-    .controller('UserGroupsController', UserGroupsController);
+    angular
+        .module('app.userGroups')
+        .controller('UserGroupsController', UserGroupsController);
 
-  UserGroupsController.$inject = ['$q', 'dataservice'];
-  /* @ngInject */
-  function UserGroupsController($q, dataservice) {
-    var vm = this;
-    
-    vm.news = {
-      title: 'testApp',
-      description: 'Hot Towel Angular is a SPA template for Angular developers.'
-    };
+    UserGroupsController.$inject = ['$rootScope', '$scope', '$q', 'underscore', 'dataservice'];
+    /* @ngInject */
+    function UserGroupsController($rootScope, $scope, $q, underscore, dataservice) {
+        var vm = this;
 
-    vm.people = [];
-    vm.title = 'Dashboard';
+        vm.groups = [];
+        vm.registeredUsers = [];
+        vm.title = 'User Groups';
+        vm.counterOfMemebers = 0;
 
-    //activate();
+        vm.getCountOfMembers = getCountOfMembers;
+        vm.addGroup = addGroup;
+        vm.removeGroup = removeGroup;
 
-    function activate() {
-      var promises = [getPeople()];
-      return $q.all(promises).then(function() {
-        console.info('Activated Dashboard View');
-      });
+        $scope.$watch('vm.groups', getCountOfMembers, true);
+
+        activate();
+
+        function activate() {
+            $rootScope.showLoading = true;
+            var promises = [getUsers()];
+            return $q.all(promises).then(function() {
+                $rootScope.showLoading = false;
+            });
+        }
+
+        function addGroup() {
+            var group = {
+                title: 'Group ' + (vm.groups.length + 1),
+                users: []
+            }
+
+            vm.groups.push(group);
+        }
+
+        function removeGroup(index) {
+            vm.registeredUsers = underscore.union(vm.registeredUsers, vm.groups[index].users);
+
+            vm.groups.splice(index, 1);
+        }
+
+        function getCountOfMembers(newVal, oldVal) {
+            var counter = 0;
+            if (newVal && !angular.equals(newVal, oldVal)) {
+                angular.forEach(vm.groups, function(value, index) {
+                    counter += value.users.length;
+                })
+
+                vm.counterOfMemebers = counter;
+            }
+        }
+
+        function getUsers() {
+            return dataservice.getUsers().then(function(data) {
+                vm.groups = data.groups;
+                vm.registeredUsers = data.registeredUsers;
+            });
+        }
+
     }
-
-    function getPeople() {
-      return dataservice.getPeople().then(function(data) {
-        vm.people = data;
-        return vm.people;
-      });
-    }
-  }
 })();

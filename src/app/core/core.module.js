@@ -5,6 +5,7 @@
         .module('app.core', [
             'ngAnimate',
             'ngRoute',
-            'ui.bootstrap'
+            'ui.bootstrap',
+            'dndLists'
         ]);
 })();

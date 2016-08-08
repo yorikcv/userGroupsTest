@@ -1,32 +1,24 @@
 (function() {
-  'use strict';
+    'use strict';
 
-  angular
-    .module('app.layout')
-    .controller('ShellController', ShellController);
+    angular
+        .module('app.layout')
+        .controller('ShellController', ShellController);
 
-  ShellController.$inject = ['$rootScope', '$timeout', 'generalConst'];
-  /* @ngInject */
-  function ShellController($rootScope, $timeout, generalConst) {
-    var vm = this;
-    
-    $rootScope.showLoading = true;
+    ShellController.$inject = ['$rootScope', '$timeout', 'generalConst'];
+    /* @ngInject */
+    function ShellController($rootScope, $timeout, generalConst) {
+        var vm = this;
 
-    vm.navline = {
-      title: generalConst.appTitle
-    };
+        vm.navline = {
+            title: generalConst.appTitle
+        };
 
-    activate();
+        activate();
 
-    function activate() {
-      hideSplash();
+        function activate() {
+
+        }
+
     }
-
-    function hideSplash() {
-      //Force a 1 second delay so we can see the splash.
-      $timeout(function() {
-        $rootScope.showLoading = false;
-      }, 1000);
-    }
-  }
 })();

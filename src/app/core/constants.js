@@ -4,6 +4,7 @@
     angular
         .module('app.core')
         .constant('moment', moment)
+        .constant('underscore', _)
         .constant('generalConst', generalConst);
 
     function generalConst() {
